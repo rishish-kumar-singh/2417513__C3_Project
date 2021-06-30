@@ -3,6 +3,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,6 +13,7 @@ class RestaurantTest {
     LocalTime openingTime = LocalTime.parse("10:30:00");
     LocalTime closingTime = LocalTime.parse("22:00:00");
     Restaurant restaurant = new Restaurant("Amelie's cafe", "Chennai", openingTime, closingTime);
+    List<Item> selectedMenuItems = new ArrayList<Item>();
 
     //>>>>>>>>>>>>>>>>>>>>>>>>>OPEN/CLOSED<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     @Test
@@ -80,4 +83,23 @@ class RestaurantTest {
         restaurant.addToMenu("Vegetable lasagne", 269);
     }
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+    //<<<<<<<<<<<<<<<<<<<<<<<< ORDER VALUE TOTAL >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    @Test
+    public void calculate_order_cost_should_return_addition_of_prices_of_selected_menu_items(){
+
+        List<Item> selectedItems = getSelectedMenuItems();
+        Double orderCost = restaurant.calculateOrderCost(selectedItems);
+        assertEquals(300.0,orderCost);
+
+    }
+
+    private List<Item> getSelectedMenuItems(){
+        selectedMenuItems.add(new Item("Sweet corn soup",100));
+        selectedMenuItems.add(new Item("Vegetable lasagne",200));
+        return selectedMenuItems;
+    }
+
 }
