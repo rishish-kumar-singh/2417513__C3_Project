@@ -70,4 +70,13 @@ public class Restaurant {
         return name;
     }
 
+    public Double calculateOrderCost(List<Item> selectedItems){
+
+        Double orderCost=0.0;
+        for(Item item:selectedItems){
+            orderCost=orderCost+item.getPrice();
+        }
+        return orderCost;
+    }
+
 }
